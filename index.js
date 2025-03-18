@@ -27,3 +27,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // Call the renderBooks function to display the books
     renderBooks();
 });
+function saveBooks() {
+    localStorage.setItem("books", JSON.stringify(books));
+    renderBooks();
+}
+
+bookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const genre = document.getElementById("genre").value;
+    const status = document.getElementById("status").value;
+
+    books.push({ title, author, genre, status, favorite: false });
+    saveBooks();
+});
+
+function editBook(index) {
+    const book = books[index];
+    document.getElementById("title").value = book.title;
+    document.getElementById("author").value = book.author;
+    document.getElementById("genre").value = book.genre;
+    document.getElementById("status").value = book.status;
+    
+    books.splice(index, 1);
+}
