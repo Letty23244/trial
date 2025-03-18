@@ -52,3 +52,21 @@ function editBook(index) {
     
     books.splice(index, 1);
 }
+
+function deleteBook(index) {
+    books.splice(index, 1);
+    saveBooks();
+}
+
+function toggleFavorite(index) {
+    books[index].favorite = !books[index].favorite;
+    saveBooks();
+}
+
+searchBar.addEventListener("keyup", () => {
+    const searchText = searchBar.value.toLowerCase();
+    renderBooks();
+    document.querySelectorAll(".book-card").forEach(book => {
+        book.style.display = book.innerText.toLowerCase().includes(searchText) ? "block" : "none";
+     });
+    });
